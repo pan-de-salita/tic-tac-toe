@@ -1,0 +1,39 @@
+@use 'reset';
+
+body {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+header {
+    border: 1px solid red;
+    height: 20%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer {
+    border: 1px solid red;
+    height: 20%;
+}
+
+.game-display {
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(3,  6.25rem);
+    grid-template-rows: repeat(3,  6.25rem);
+
+    .cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
