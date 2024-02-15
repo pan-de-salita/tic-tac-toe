@@ -14,7 +14,7 @@ const displayGameState = (gameState) => {
 // displays a single cell
 const displayCell = (cell) => {
   gameDisplay.append(createCell(cell));
-};
+}
 
 // creates a single cell
 const createCell = (cell) => {
