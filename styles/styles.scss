@@ -1,16 +1,26 @@
 @use 'reset';
+@use 'game-elements';
+@use 'colors' as c;
 
 body {
     width: 100dvw;
     height: 100dvh;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
+    background: c.$bg-color-primary;
 }
 
 header {
-    border: 1px solid red;
-    height: 20%;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: monospace;
+    color: c.$txt-color-primary;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 main {
@@ -21,19 +31,16 @@ main {
 }
 
 footer {
-    border: 1px solid red;
-    height: 20%;
-}
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 
-.game-display {
-    border: 1px solid red;
-    display: grid;
-    grid-template-columns: repeat(3,  6.25rem);
-    grid-template-rows: repeat(3,  6.25rem);
-
-    .cell {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .btn {
+        color: c.$txt-color-primary;
+        font-size: 0.8rem;
+        font-weight: bold;
     }
 }
+
