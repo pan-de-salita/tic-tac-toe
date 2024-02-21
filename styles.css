@@ -61,6 +61,7 @@ table {
   background: transparent;
   transition: background 0.3s ease, border-radius 0.5s ease, border 0.5s ease, transform 0.2s ease, width 0.2s ease, height 0.2s ease, margin 0.2s ease;
   padding: 0;
+  cursor: pointer;
 }
 .game-container .cell:hover {
   border-width: 0.3125rem;
@@ -89,6 +90,57 @@ table {
   border: 18px solid #035668;
 }
 
+.game-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #373434;
+}
+
+.red {
+  color: #D45757;
+}
+
+.blue {
+  color: #035668;
+}
+
+.msg-container {
+  font-family: "Poppins", sans-serif;
+  padding-bottom: 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.btn-container {
+  display: flex;
+  gap: 3.8rem;
+}
+
+.btn {
+  padding-bottom: 1.4rem;
+  max-height: 24px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #D45757;
+  transition: border-width 0.2s ease;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #373434;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-width: 0.4rem;
+}
+
+.back,
+.next {
+  visibility: hidden;
+  border-color: #035668;
+}
+
 body {
   width: 100dvw;
   height: 100dvh;
@@ -99,15 +151,10 @@ body {
 }
 
 header {
-  height: 10%;
+  height: 15%;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  font-family: monospace;
-  color: #373434;
-  font-size: 2rem;
-  font-weight: bold;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 main {
@@ -118,16 +165,11 @@ main {
 }
 
 footer {
-  height: 10%;
+  height: 18%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-}
-footer .btn {
-  color: #373434;
-  font-size: 0.8rem;
-  font-weight: bold;
 }
 
 /*# sourceMappingURL=styles.css.map */

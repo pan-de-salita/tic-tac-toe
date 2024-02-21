@@ -3,27 +3,32 @@
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tic tac toe</title>
+    <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="./styles.css" type="text/css" media="screen" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script type="module" src="./init.js" defer></script>
   </head>
   <body>
     <header>
-      <h1>tic tac toe</h1>
+      <span class="game-title">Tic</span>
+      <span class="game-title red">Tac</span>
+      <span class="game-title">T</span><span class="game-title blue">o</span><span class="game-title">e</span>
     </header>
 
     <main>
-      <div class="msg-container">
-        <h2 class="msg">something</h2>
+      <div class='msg-container'>
+        <h2 class='msg'>UY.</h2>
       </div>
-      <div class="game-container"></div>
+      <div class='game-container'></div>
     </main>
 
     <footer>
-      <div class="btn-container">
-        <button class='btn back'>back</button>
-        <button class='btn restart'>restart</button>
-        <button class='btn next'>next</button>
+      <div class='btn-container'>
+        <div class='btn-wrapper'><button class='btn back'>Back</button></div>
+        <div class='btn-wrapper'><button class='btn restart'>Restart</button></div>
+        <div class='btn-wrapper'><button class='btn next'>Next</button></div>
       </div>
     </footer>
   </body>

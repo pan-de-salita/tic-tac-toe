@@ -1,6 +1,7 @@
 import { CELLS } from '../init.js';
 import { updateCurrentGameState } from './updateCurrentGameState.js';
 import { isWin } from './isWin.js';
+import { enableGameRecordNavigation } from './handleBackAndNextBtns.js';
 
 export function handleCell(e) {
   let targetCell = e.target;
@@ -10,7 +11,8 @@ export function handleCell(e) {
   updateCurrentGameState();
 
   if (isWin()) {
-    CELLS.forEach(cell => cell.disabled = true);
+    disableCells();
+    enableGameRecordNavigation();
   }
 }
 
@@ -28,5 +30,9 @@ function switchTurn(cells = CELLS) {
         cell.classList.replace('o-symbol', 'x-symbol');
       }
     }
-  })
+  });
+}
+
+function disableCells() {
+  CELLS.forEach(cell => cell.disabled = true);
 }

@@ -2,9 +2,9 @@ import { currentGameState } from './updateCurrentGameState.js';
 import { createDefaultGameState } from './updateCurrentGameState.js';
 
 export function isWin(gameState = currentGameState) {
-  return checkForWin(gameState)
-    || checkForWin(reorientVertical(gameState))
-    || checkForWin(makeDiagonal(gameState));
+  return checkForWin(gameState) // checks per row
+    || checkForWin(reorientVertical(gameState)) // checks per column
+    || checkForWin(makeDiagonal(gameState)); // checks per diagonal
 }
 
 function checkForWin(gameState) {
@@ -14,10 +14,10 @@ function checkForWin(gameState) {
 
     if (allX.length === 3) {
       console.log('x wins');
-      return true;
+      return true; // TODO: display result in .msg-container
     } else if (allO.length === 3) {
       console.log('o wins');
-      return true;
+      return true; // TODO: display result in .msg-container
     }
   }
 

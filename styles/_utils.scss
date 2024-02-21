@@ -1,0 +1,52 @@
+@use 'colors' as c;
+
+.game-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: c.$txt-color-primary;
+}
+
+.red {
+    color: c.$x-color-primary;
+}
+
+.blue {
+    color: c.$o-color-primary;
+}
+
+.msg-container {
+    font-family: 'Poppins', sans-serif;
+    padding-bottom: 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.btn-container {
+    display: flex;
+    gap: 3.8rem;
+}
+
+.btn {
+    padding-bottom: 1.4rem;
+    max-height: 24px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid c.$x-color-primary;
+    transition: border-width 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: c.$txt-color-primary;
+    cursor: pointer;
+}
+
+.btn:hover {
+    border-width: 0.4rem;
+}
+
+.back,
+.next {
+    visibility: hidden;
+    border-color: c.$o-color-primary;
+}

@@ -1,6 +1,7 @@
-import { currentGameState } from './updateCurrentGameState.js';
+import { createDefaultGameState, currentGameState } from './updateCurrentGameState.js';
+import { CELLS } from '../init.js';
 
-const GAME_DISPLAY = document.querySelector('.game-container');
+export const GAME_DISPLAY = document.querySelector('.game-container');
 
 export function renderGameState(gameState = currentGameState) {
   gameState.forEach(row => row.forEach(cell => renderCell(cell)));
@@ -19,4 +20,15 @@ function renderCell(cell) {
   }
 
   GAME_DISPLAY.append(cellElement);
+}
+
+export async function newGame() {
+  localStorage.clear();
+
+  await new Promise(resolve => setTimeout(resolve, 100));
+
+  CELLS.forEach(cell => {
+    cell.classList.remove('filled');
+    cell.classList.replace('o-symbol', 'x-symbol');
+  });
 }

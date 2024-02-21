@@ -1,27 +1,28 @@
 import { CELLS } from '../init.js';
+import { isWin } from './isWin.js';
 
-export let currentGameState = JSON.parse(localStorage.getItem('currentGameState')) || createDefaultGameState();
-export let currentGameRecord = JSON.parse(localStorage.getItem('currentGameRecord')) || [];
-
-export function updateCurrentGameState() {
-  updateGameRecord();
-  clearCurrentGameState();
-  createNewGameState();
-}
+export let currentGameState = createDefaultGameState();
+export let currentGameRecord = [];
 
 export function createDefaultGameState() {
   return Array(3).fill().map(() => Array(3).fill());
 }
 
-function updateGameRecord() {
+export function updateCurrentGameState() {
+  updateCurrentGameRecord();
+  clearCurrentGameState();
+  createNewGameState();
+}
+
+function updateCurrentGameRecord() {
   currentGameRecord.push(currentGameState);
   localStorage.setItem('currentGameRecord', JSON.stringify(currentGameRecord));
-  return currentGameRecord = JSON.parse(localStorage.getItem('currentGameRecord'));
+  return currentGameRecord;
 }
 
 function clearCurrentGameState() {
   localStorage.setItem('currentGameState', JSON.stringify(createDefaultGameState()));
-  return currentGameState = JSON.parse(localStorage.getItem('currentGameState'));
+  return currentGameState;
 }
 
 function createNewGameState(cells = CELLS) {
