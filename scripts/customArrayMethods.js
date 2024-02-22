@@ -39,6 +39,6 @@ const arr0 = [1, 1, 1, 1];
 const arr1 = [1, 1, 0, 1];
 const arr2 = [[...arr0], [...arr0], [...arr0]];
 
-console.log(andMap(arr0, (x, y) => x === y)); // true
-console.log(andMap(arr1, (x, y) => x === y)); // false
-console.log(arr2.every(subArray => andMap(subArray, (x, y) => x === y))); // true
+console.log(andMap(arr0, (x, y) => x === y)); // -> true
+console.log(andMap(arr1, (x, y) => x === y)); // -> false
+console.log(arr2.every(subArray => andMap(subArray, (x, y) => x === y))); // -> true
