@@ -8,30 +8,38 @@ let gameRecordIndex;
 
 export function enableGameRecordNavigation() {
   defineGameRecordIndex();
-  enableBtn(BACK_BTN);
+  showBtn(BACK_BTN);
 }
 
-function enableBtn(btn) {
+function navigateGameStates(e) {
+  if (e.target === BACK_BTN && gameRecordIndex > 0) {
+    gameRecordIndex--;
+    showBtn(NEXT_BTN);
+    if (gameRecordIndex <= 0) hideBtn(BACK_BTN);
+  } else if (e.target === NEXT_BTN && gameRecordIndex < currentGameRecord.length) {
+    gameRecordIndex++;
+    showBtn(BACK_BTN);
+    if (gameRecordIndex >= currentGameRecord.length) hideBtn(NEXT_BTN);
+  }
+
+  revisitGameState(currentGameRecord[gameRecordIndex])
+}
+
+BTN_CONTAINER.addEventListener('click', navigateGameStates);
+
+function showBtn(btn) {
   btn.style.visibility = 'visible';
+}
+
+function hideBtn(btn) {
+  btn.style.visibility = 'hidden';
 }
 
 function defineGameRecordIndex() {
   gameRecordIndex = currentGameRecord.length;
 }
 
-function navigateGameStates(e) {
-  if (e.target === BACK_BTN && gameRecordIndex > 0) {
-    gameRecordIndex--;
-    GAME_DISPLAY.innerHTML = '';
-    renderGameState(currentGameRecord[gameRecordIndex]);
-    enableBtn(NEXT_BTN);
-    console.log(gameRecordIndex);
-  } else if (e.target === NEXT_BTN && gameRecordIndex < currentGameRecord.length) {
-    gameRecordIndex++;
-    GAME_DISPLAY.innerHTML = '';
-    renderGameState(currentGameRecord[gameRecordIndex]);
-    console.log(gameRecordIndex);
-  }
+function revisitGameState(gameState) {
+  GAME_DISPLAY.innerHTML = '';
+  renderGameState(gameState);
 }
-
-BTN_CONTAINER.addEventListener('click', navigateGameStates);

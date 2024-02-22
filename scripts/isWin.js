@@ -1,5 +1,4 @@
-import { currentGameState } from './updateCurrentGameState.js';
-import { createDefaultGameState } from './updateCurrentGameState.js';
+import { currentGameState, createDefaultGameState } from './updateCurrentGameState.js';
 
 export function isWin(gameState = currentGameState) {
   return checkForWin(gameState) // checks per row
