@@ -1,7 +1,6 @@
 import { renderGameState, GAME_DISPLAY } from './renderGameState.js';
 import { currentGameRecord } from './updateCurrentGameState.js';
 
-const BTN_CONTAINER = document.querySelector('.btn-container');
 const BACK_BTN = document.querySelector('.back');
 const NEXT_BTN = document.querySelector('.next');
 let gameRecordIndex;
@@ -11,7 +10,7 @@ export function enableGameRecordNavigation() {
   showBtn(BACK_BTN);
 }
 
-function navigateGameStates(e) {
+export function navigateGameStates(e) {
   if (e.target === BACK_BTN && gameRecordIndex > 0) {
     gameRecordIndex--;
     showBtn(NEXT_BTN);
@@ -24,8 +23,6 @@ function navigateGameStates(e) {
 
   revisitGameState(currentGameRecord[gameRecordIndex])
 }
-
-BTN_CONTAINER.addEventListener('click', navigateGameStates);
 
 function showBtn(btn) {
   btn.style.visibility = 'visible';

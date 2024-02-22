@@ -12,20 +12,24 @@
   </head>
   <body>
     <!-- handles following Firefox error: --
-      --  Layout was forced before the page was fully loaded. --
-      --  If stylesheets are not yet loaded this may cause a --
-      --  flash of unstyled content.-->
+    --  Layout was forced before the page was fully loaded. --
+    --  If stylesheets are not yet loaded this may cause a --
+    --  flash of unstyled content.-->
     <script>0</script>
 
     <header>
-      <span class="game-title">Tic</span>
-      <span class="game-title red">Tac</span>
-      <span class="game-title">T</span><span class="game-title blue">o</span><span class="game-title">e</span>
+      <div class="game-title-container">
+        <span class="game-title">Tic</span>
+        <span class="game-title red-text">Tac</span>
+        <span class="game-title">T</span><span class="game-title blue-text">o</span><span class="game-title">e</span>
+      </div>
+      <button class="player-select">Play against self</button>
     </header>
 
     <main>
       <div class='msg-container'>
-        <h2 class='msg'>UY.</h2>
+        <h2 class='msg x-move red-text'>X'S MOVE</h2>
+        <h2 class='msg o-move blue-text'>O'S MOVE</h2>
       </div>
       <div class='game-container'>
         <!-- game elements created with js -->

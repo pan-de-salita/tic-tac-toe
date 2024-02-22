@@ -1,5 +1,4 @@
 import { CELLS } from '../init.js';
-import { isWin } from './isWin.js';
 
 export let currentGameState = createDefaultGameState();
 export let currentGameRecord = [];

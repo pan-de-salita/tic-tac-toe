@@ -12,11 +12,11 @@ function checkForWin(gameState) {
     let allO = gameState[i].filter(value => value === 'o');
 
     if (allX.length === 3) {
-      console.log('x wins');
-      return true; // TODO: display result in .msg-container
+      localStorage.setItem('result', 'X WINS');
+      return true;
     } else if (allO.length === 3) {
-      console.log('o wins');
-      return true; // TODO: display result in .msg-container
+      localStorage.setItem('result', 'O WINS');
+      return true;
     }
   }
 

@@ -25,6 +25,10 @@ $o-length: 5rem;
         border-width: 0.3125rem;
     }
 
+    .cell:active {
+        transform: scale(0.9);
+    }
+
     .x-symbol {
         margin: 0.9375rem;
         width: $x-length;

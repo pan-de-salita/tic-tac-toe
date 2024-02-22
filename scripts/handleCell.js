@@ -3,15 +3,19 @@ import { updateCurrentGameState } from './updateCurrentGameState.js';
 import { isWin } from './isWin.js';
 import { isDraw } from './isDraw.js';
 import { enableGameRecordNavigation } from './handleBackAndNextBtns.js';
+import { changeTurnMessage } from './changeMessage.js';
+import { renderGameResult } from './renderGameState.js';
 
 export function handleCell(e) {
   makeMove(e.target);
   switchTurn();
+  changeTurnMessage();
   updateCurrentGameState();
 
   if (isWin() || isDraw()) {
     disableCells();
     enableGameRecordNavigation();
+    renderGameResult();
   }
 }
 
