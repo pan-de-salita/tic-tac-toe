@@ -1,12 +1,11 @@
 import { CELLS } from '../init.js';
 import { updateCurrentGameState } from './updateCurrentGameState.js';
 import { isWin } from './isWin.js';
+import { isDraw } from './isDraw.js';
 import { enableGameRecordNavigation } from './handleBackAndNextBtns.js';
 
 export function handleCell(e) {
-  let targetCell = e.target;
-
-  makeMove(targetCell);
+  makeMove(e.target);
   switchTurn();
   updateCurrentGameState();
 
