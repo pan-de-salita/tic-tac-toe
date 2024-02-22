@@ -9,7 +9,7 @@ export const CELLS = document.querySelectorAll('.cell');
 CELLS.forEach(cell => cell.addEventListener('click', handleCell));
 
 // restarts game via restart button
-const RESTART_BTN = document.querySelector('.restart');
+export const RESTART_BTN = document.querySelector('.restart');
 RESTART_BTN.addEventListener('click', () => {
   location.reload();
 });

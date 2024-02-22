@@ -5,6 +5,7 @@ export const GAME_DISPLAY = document.querySelector('.game-container');
 const MESSAGE_DISPLAY = document.querySelector('.msg-container');
 
 export function renderGameState(gameState = currentGameState) {
+  console.log('How cheerfully we consign ourselves to perdition.');
   gameState.forEach(row => row.forEach(cell => renderCell(cell)));
 }
 
