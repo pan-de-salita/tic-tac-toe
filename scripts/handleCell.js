@@ -10,7 +10,7 @@ export function handleCell(e) {
   switchTurn();
   updateCurrentGameState();
 
-  if (isWin()) {
+  if (isWin() || isDraw()) {
     disableCells();
     enableGameRecordNavigation();
   }
