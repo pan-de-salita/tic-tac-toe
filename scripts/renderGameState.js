@@ -18,13 +18,11 @@ function renderCell(cell, rowIndex, cellIndex) {
   if (!cell) {
     cellElement.classList.add('x-symbol', `x${rowIndex}`, `y${cellIndex}`);
     cellElement.addEventListener('click', handleCell);
-    console.log(cellElement);
   } else {
     cellElement.classList.toggle(`${cell === 'x' ? 'x-symbol' : 'o-symbol'}`);
     cellElement.classList.toggle('filled');
     cellElement.classList.toggle(`x${rowIndex}`);
     cellElement.classList.toggle(`y${cellIndex}`);
-    console.log(cellElement);
   }
 
   GAME_DISPLAY.append(cellElement);
