@@ -2,55 +2,26 @@ import { createDefaultGameState, currentGameState } from './updateCurrentGameSta
 import { CELLS } from '../init.js';
 
 export const GAME_DISPLAY = document.querySelector('.game-container');
-const MESSAGE_DISPLAY = document.querySelector('.msg-container');
 
 export function renderGameState(gameState = currentGameState) {
-  console.log('How cheerfully we consign ourselves to perdition.');
-  gameState.forEach(row => row.forEach(cell => renderCell(cell)));
+  gameState.forEach((row, i) => row.forEach((cell, j) => renderCell(cell, i, j)));
 }
 
-function renderCell(cell) {
+function renderCell(cell, rowIndex, cellIndex) {
   const cellElement = document.createElement('button');
+  cellElement.classList.add('cell');
 
   if (!cell) {
-    cellElement.classList.add('cell', 'x-symbol'); // x-symbol as default
+    cellElement.classList.add('x-symbol', `x${rowIndex}`, `y${cellIndex}`);
   } else {
-    // handles rendering per page reload
-    cellElement.classList.toggle('cell');
+    // handles rendering during game state navigation
     cellElement.classList.toggle(`${cell === 'x' ? 'x-symbol' : 'o-symbol'}`);
     cellElement.classList.toggle('filled');
+    cellElement.classList.toggle(`x${rowIndex}`);
+    cellElement.classList.toggle(`y${cellIndex}`);
   }
 
   GAME_DISPLAY.append(cellElement);
-}
-
-export function renderGameResult() {
-  MESSAGE_DISPLAY.innerHTML = '';
-  renderResult();
-}
-
-function renderResult(resultFromStorage = localStorage.getItem('result')) {
-  const result = document.createElement('h2');
-  result.classList.toggle('msg');
-  result.classList.toggle('result');
-  result.textContent = resultFromStorage;
-  result.style.animation = 'fadeIn 0.8s ease-out';
-  result.style.color = resultColor();
-  MESSAGE_DISPLAY.append(result);
-}
-
-function resultColor(resultFromStorage = localStorage.getItem('result')) {
-  let resultColor;
-
-  if (resultFromStorage.includes('X')) {
-    resultColor = '#D45757';
-  } else if (resultFromStorage.includes('O')) {
-    resultColor = '#035668';
-  } else {
-    resultColor = '#373434';
-  }
-
-  return resultColor;
 }
 
 export function newGame() {

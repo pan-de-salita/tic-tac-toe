@@ -1,13 +1,15 @@
 import { CELLS } from '../init.js';
-import { updateCurrentGameState } from './updateCurrentGameState.js';
+import { currentGameState, updateCurrentGameState } from './updateCurrentGameState.js';
 import { isWin } from './isWin.js';
 import { isDraw } from './isDraw.js';
 import { enableGameRecordNavigation } from './handleBackAndNextBtns.js';
-import { changeTurnMessage } from './changeMessage.js';
-import { renderGameResult } from './renderGameState.js';
+import { changeTurnMessage } from './changeTurnMessage.js';
+import { renderGameResult } from './renderGameResult.js';
+import { logCurrentMove } from './logCurrentMove.js';
 
 export function handleCell(e) {
   makeMove(e.target);
+  logCurrentMove(e.target);
   switchTurn();
   changeTurnMessage();
   updateCurrentGameState();
@@ -16,6 +18,8 @@ export function handleCell(e) {
     disableCells();
     enableGameRecordNavigation();
     renderGameResult();
+  } else {
+    localStorage.setItem('result', '');
   }
 }
 
