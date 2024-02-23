@@ -2,7 +2,7 @@ import { xMove, oMove } from './changeTurnMessage.js';
 
 const MESSAGE_DISPLAY = document.querySelector('.msg-container');
 
-let resultElement = undefined;
+let resultElement;
 
 export function renderGameResultMessage(result) {
   xMove.style.display = 'none';
@@ -11,7 +11,7 @@ export function renderGameResultMessage(result) {
 }
 
 export function clearGameResultMessage() {
-  resultElement.style.display = 'none';
+  if (resultElement) resultElement.style.display = 'none';
   xMove.style.display = 'block';
   oMove.style.display = 'block';
 }

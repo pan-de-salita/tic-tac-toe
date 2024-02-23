@@ -2,7 +2,7 @@ import { createDefaultGameState, clearCurrentGameState, clearCurrentGameRecord }
 import { handleCell } from './handleCell.js';
 import { refreshTurnMessage } from './changeTurnMessage.js';
 import { clearGameResultMessage } from './renderGameResult.js';
-import { refreshResult, result } from './checkResult.js';
+import { refreshResult } from './checkResult.js';
 import { hideBtn, BACK_BTN, NEXT_BTN } from './handleBackAndNextBtns.js';
 
 export const GAME_DISPLAY = document.querySelector('.game-container');
