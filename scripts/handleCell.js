@@ -19,6 +19,10 @@ export function handleCell(e) {
   }
 }
 
+export function disableCells() {
+  document.querySelectorAll('.cell').forEach(cell => cell.disabled = true);
+}
+
 function makeMove(targetCell) {
   targetCell.classList.add('filled');
   targetCell.disabled = true;
@@ -34,8 +38,4 @@ function switchTurn() {
       }
     }
   });
-}
-
-function disableCells() {
-  document.querySelectorAll('.cell').forEach(cell => cell.disabled = true);
 }

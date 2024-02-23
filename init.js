@@ -2,9 +2,10 @@ import { renderGameState, createNewGame, GAME_DISPLAY } from './scripts/renderGa
 import { handleCell } from './scripts/handleCell.js';
 import { navigateGameStates } from './scripts/handleBackAndNextBtns.js';
 import { playerSelect } from './scripts/playerSelect.js';
+import { createDefaultGameState } from './scripts/updateCurrentGameState.js';
 
 // initializes game
-renderGameState();
+renderGameState(createDefaultGameState());
 
 // restarts game via restart button
 export const RESTART_BTN = document.querySelector('.restart');

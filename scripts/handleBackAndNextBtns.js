@@ -1,5 +1,6 @@
 import { renderGameState, GAME_DISPLAY } from './renderGameState.js';
 import { currentGameRecord } from './updateCurrentGameState.js';
+import { disableCells } from './handleCell.js';
 
 export const BACK_BTN = document.querySelector('.back');
 export const NEXT_BTN = document.querySelector('.next');
@@ -15,23 +16,23 @@ export function navigateGameStates(e) {
     gameRecordIndex--;
     showBtn(NEXT_BTN);
     if (gameRecordIndex <= 0) hideBtn(BACK_BTN);
+    revisitGameState(currentGameRecord[gameRecordIndex]);
   } else if (e.target === NEXT_BTN && currentGameRecord.length) {
     gameRecordIndex++;
     showBtn(BACK_BTN);
     if (gameRecordIndex >= currentGameRecord.length - 1) hideBtn(NEXT_BTN);
+    revisitGameState(currentGameRecord[gameRecordIndex]);
   }
-
-  revisitGameState(currentGameRecord[gameRecordIndex])
 }
 
 function showBtn(btn) {
   btn.style.visibility = 'visible';
-  btn.classList.disabled = false;
+  btn.disabled = false;
 }
 
 export function hideBtn(btn) {
   btn.style.visibility = 'hidden';
-  btn.classList.disabled = true;
+  btn.disabled = true;
 }
 
 function defineGameRecordIndex() {
@@ -41,4 +42,5 @@ function defineGameRecordIndex() {
 function revisitGameState(gameState) {
   GAME_DISPLAY.innerHTML = '';
   renderGameState(gameState);
+  disableCells();
 }

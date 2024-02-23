@@ -1,6 +1,4 @@
-import { createDefaultGameState,
-         clearCurrentGameState,
-         clearCurrentGameRecord } from './updateCurrentGameState.js';
+import { createDefaultGameState, clearCurrentGameState, clearCurrentGameRecord } from './updateCurrentGameState.js';
 import { handleCell } from './handleCell.js';
 import { refreshTurnMessage } from './changeTurnMessage.js';
 import { clearGameResultMessage } from './renderGameResult.js';
@@ -9,7 +7,7 @@ import { hideBtn, BACK_BTN, NEXT_BTN } from './handleBackAndNextBtns.js';
 
 export const GAME_DISPLAY = document.querySelector('.game-container');
 
-export function renderGameState(gameState = createDefaultGameState()) {
+export function renderGameState(gameState) {
   gameState.forEach((row, i) => row.forEach((cell, j) => renderCell(cell, i, j)));
 }
 
@@ -20,12 +18,13 @@ function renderCell(cell, rowIndex, cellIndex) {
   if (!cell) {
     cellElement.classList.add('x-symbol', `x${rowIndex}`, `y${cellIndex}`);
     cellElement.addEventListener('click', handleCell);
+    console.log(cellElement);
   } else {
-    // handles rendering for game state navigation
     cellElement.classList.toggle(`${cell === 'x' ? 'x-symbol' : 'o-symbol'}`);
     cellElement.classList.toggle('filled');
     cellElement.classList.toggle(`x${rowIndex}`);
     cellElement.classList.toggle(`y${cellIndex}`);
+    console.log(cellElement);
   }
 
   GAME_DISPLAY.append(cellElement);
@@ -43,5 +42,5 @@ export function createNewGame() {
   refreshTurnMessage();
   hideBtn(BACK_BTN);
   hideBtn(NEXT_BTN);
-  renderGameState();
+  renderGameState(createDefaultGameState());
 }
