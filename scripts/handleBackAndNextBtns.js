@@ -15,10 +15,10 @@ export function navigateGameStates(e) {
     gameRecordIndex--;
     showBtn(NEXT_BTN);
     if (gameRecordIndex <= 0) hideBtn(BACK_BTN);
-  } else if (e.target === NEXT_BTN && gameRecordIndex < currentGameRecord.length) {
+  } else if (e.target === NEXT_BTN && currentGameRecord.length) {
     gameRecordIndex++;
     showBtn(BACK_BTN);
-    if (gameRecordIndex >= currentGameRecord.length) hideBtn(NEXT_BTN);
+    if (gameRecordIndex >= currentGameRecord.length - 1) hideBtn(NEXT_BTN);
   }
 
   revisitGameState(currentGameRecord[gameRecordIndex])
@@ -26,14 +26,16 @@ export function navigateGameStates(e) {
 
 function showBtn(btn) {
   btn.style.visibility = 'visible';
+  btn.classList.disabled = false;
 }
 
-function hideBtn(btn) {
+export function hideBtn(btn) {
   btn.style.visibility = 'hidden';
+  btn.classList.disabled = true;
 }
 
 function defineGameRecordIndex() {
-  gameRecordIndex = currentGameRecord.length;
+  gameRecordIndex = currentGameRecord.length - 1;
 }
 
 function revisitGameState(gameState) {

@@ -1,22 +1,14 @@
-import { renderGameState, newGame, GAME_DISPLAY } from './scripts/renderGameState.js';
+import { renderGameState, createNewGame, GAME_DISPLAY } from './scripts/renderGameState.js';
 import { handleCell } from './scripts/handleCell.js';
 import { navigateGameStates } from './scripts/handleBackAndNextBtns.js';
 import { playerSelect } from './scripts/playerSelect.js';
 
 // initializes game
 renderGameState();
-export const CELLS = document.querySelectorAll('.cell');
-CELLS.forEach(cell => cell.addEventListener('click', handleCell));
 
 // restarts game via restart button
 export const RESTART_BTN = document.querySelector('.restart');
-RESTART_BTN.addEventListener('click', () => {
-  newGame();
-  location.reload();
-});
-
-// clear local storage per reload
-window.onload = newGame();
+RESTART_BTN.addEventListener('click', createNewGame);
 
 // allows player to play against themselves or with the computer
 const playerSelectBtn = document.querySelector('.player-select');

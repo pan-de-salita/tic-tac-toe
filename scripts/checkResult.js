@@ -1,9 +1,23 @@
-import { currentGameState, createDefaultGameState } from './updateCurrentGameState.js';
+import { createDefaultGameState } from './updateCurrentGameState.js';
 
-export function isWin(gameState = currentGameState) {
+export let result = '';
+
+export function isWin(gameState) {
   return checkForWin(gameState) // checks per row
     || checkForWin(reorientVertical(gameState)) // checks per column
     || checkForWin(makeDiagonal(gameState)); // checks per diagonal
+}
+
+export function isDraw(gameState) {
+  if (gameState.every(subArray => subArray.every(value => (typeof value) === 'string'))) {
+    result = 'DRAW';
+    return true;
+  }
+  return false;
+}
+
+export function refreshResult() {
+  result = '';
 }
 
 function checkForWin(gameState) {
@@ -12,10 +26,10 @@ function checkForWin(gameState) {
     let allO = gameState[i].filter(value => value === 'o');
 
     if (allX.length === 3) {
-      localStorage.setItem('result', 'X WINS');
+      result = 'X WINS';
       return true;
     } else if (allO.length === 3) {
-      localStorage.setItem('result', 'O WINS');
+      result = 'O WINS';
       return true;
     }
   }

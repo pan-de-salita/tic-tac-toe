@@ -1,9 +1,15 @@
-import { createDefaultGameState, currentGameState } from './updateCurrentGameState.js';
-import { CELLS } from '../init.js';
+import { createDefaultGameState,
+         clearCurrentGameState,
+         clearCurrentGameRecord } from './updateCurrentGameState.js';
+import { handleCell } from './handleCell.js';
+import { refreshTurnMessage } from './changeTurnMessage.js';
+import { clearGameResultMessage } from './renderGameResult.js';
+import { refreshResult, result } from './checkResult.js';
+import { hideBtn, BACK_BTN, NEXT_BTN } from './handleBackAndNextBtns.js';
 
 export const GAME_DISPLAY = document.querySelector('.game-container');
 
-export function renderGameState(gameState = currentGameState) {
+export function renderGameState(gameState = createDefaultGameState()) {
   gameState.forEach((row, i) => row.forEach((cell, j) => renderCell(cell, i, j)));
 }
 
@@ -13,8 +19,9 @@ function renderCell(cell, rowIndex, cellIndex) {
 
   if (!cell) {
     cellElement.classList.add('x-symbol', `x${rowIndex}`, `y${cellIndex}`);
+    cellElement.addEventListener('click', handleCell);
   } else {
-    // handles rendering during game state navigation
+    // handles rendering for game state navigation
     cellElement.classList.toggle(`${cell === 'x' ? 'x-symbol' : 'o-symbol'}`);
     cellElement.classList.toggle('filled');
     cellElement.classList.toggle(`x${rowIndex}`);
@@ -24,11 +31,17 @@ function renderCell(cell, rowIndex, cellIndex) {
   GAME_DISPLAY.append(cellElement);
 }
 
-export function newGame() {
-  localStorage.clear();
+export function createNewGame() {
+  console.clear();
 
-  CELLS.forEach(cell => {
-    cell.classList.remove('filled');
-    cell.classList.replace('o-symbol', 'x-symbol');
-  });
+  GAME_DISPLAY.innerHTML = '';
+
+  clearCurrentGameState();
+  clearCurrentGameRecord();
+  clearGameResultMessage();
+  refreshResult();
+  refreshTurnMessage();
+  hideBtn(BACK_BTN);
+  hideBtn(NEXT_BTN);
+  renderGameState();
 }

@@ -1,30 +1,25 @@
-import { CELLS } from '../init.js';
-
 export let currentGameState = createDefaultGameState();
-export let currentGameRecord = [];
+export let currentGameRecord = [createDefaultGameState()];
 
 export function createDefaultGameState() {
   return Array(3).fill().map(() => Array(3).fill());
 }
 
 export function updateCurrentGameState() {
-  updateCurrentGameRecord();
   clearCurrentGameState();
-  createNewGameState();
+  createNewGameState(document.querySelectorAll('.cell'));
+  updateCurrentGameRecord();
 }
 
-function updateCurrentGameRecord() {
-  currentGameRecord.push(currentGameState);
-  localStorage.setItem('currentGameRecord', JSON.stringify(currentGameRecord));
-  return currentGameRecord;
+export function clearCurrentGameRecord() {
+  currentGameRecord = [createDefaultGameState()];
 }
 
-function clearCurrentGameState() {
-  localStorage.setItem('currentGameState', JSON.stringify(createDefaultGameState()));
-  return currentGameState;
+export function clearCurrentGameState() {
+  currentGameState = createDefaultGameState();
 }
 
-function createNewGameState(cells = CELLS) {
+function createNewGameState(cells) {
   currentGameState = currentGameState.map((subArray, i) =>
     subArray.map((_, j) => {
       const cellIndex = i * currentGameState.length + j;
@@ -36,7 +31,8 @@ function createNewGameState(cells = CELLS) {
       return subArray[j];
     })
   );
+}
 
-  localStorage.setItem('currentGameState', JSON.stringify(currentGameState));
-  return currentGameState;
+function updateCurrentGameRecord() {
+  currentGameRecord.push(currentGameState);
 }

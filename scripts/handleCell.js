@@ -1,25 +1,21 @@
-import { CELLS } from '../init.js';
-import { currentGameState, updateCurrentGameState } from './updateCurrentGameState.js';
-import { isWin } from './isWin.js';
-import { isDraw } from './isDraw.js';
+import { updateCurrentGameState, currentGameState } from './updateCurrentGameState.js';
+import { result, isWin, isDraw } from './checkResult.js';
 import { enableGameRecordNavigation } from './handleBackAndNextBtns.js';
 import { changeTurnMessage } from './changeTurnMessage.js';
-import { renderGameResult } from './renderGameResult.js';
+import { renderGameResultMessage } from './renderGameResult.js';
 import { logCurrentMove } from './logCurrentMove.js';
 
 export function handleCell(e) {
   makeMove(e.target);
-  logCurrentMove(e.target);
   switchTurn();
   changeTurnMessage();
   updateCurrentGameState();
+  logCurrentMove(e.target);
 
-  if (isWin() || isDraw()) {
+  if (isWin(currentGameState) || isDraw(currentGameState)) {
     disableCells();
     enableGameRecordNavigation();
-    renderGameResult();
-  } else {
-    localStorage.setItem('result', '');
+    renderGameResultMessage(result);
   }
 }
 
@@ -28,8 +24,8 @@ function makeMove(targetCell) {
   targetCell.disabled = true;
 }
 
-function switchTurn(cells = CELLS) {
-  cells.forEach(cell => {
+function switchTurn() {
+  document.querySelectorAll('.cell').forEach(cell => {
     if (!cell.classList.contains('filled')) {
       if (cell.classList.contains('x-symbol')) {
         cell.classList.replace('x-symbol', 'o-symbol');
@@ -41,5 +37,5 @@ function switchTurn(cells = CELLS) {
 }
 
 function disableCells() {
-  CELLS.forEach(cell => cell.disabled = true);
+  document.querySelectorAll('.cell').forEach(cell => cell.disabled = true);
 }
