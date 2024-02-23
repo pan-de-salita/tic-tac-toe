@@ -23,9 +23,7 @@ export function handleCell(e) {
       computerMakesMove(chooseRandomAvailableCell(findAvailableCells()));
       switchTurn();
       changeTurnMessage();
-      updateCurrentGameState();
-    }, 500);
-
+    }, 700);
   }
 }
 
