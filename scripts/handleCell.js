@@ -4,8 +4,10 @@ import { enableGameRecordNavigation } from './handleBackAndNextBtns.js';
 import { changeTurnMessage } from './changeTurnMessage.js';
 import { renderGameResultMessage } from './renderGameResult.js';
 import { logCurrentMove } from './logCurrentMove.js';
+import { computerMakesMove, findAvailableCells, chooseRandomAvailableCell } from './computerMakesMove.js';
 
 export function handleCell(e) {
+  let playerMode = document.querySelector('.player-select').textContent;
   makeMove(e.target);
   switchTurn();
   changeTurnMessage();
@@ -16,6 +18,14 @@ export function handleCell(e) {
     disableCells();
     enableGameRecordNavigation();
     renderGameResultMessage(result);
+  } else if (playerMode === 'Play against computer') {
+    setTimeout(() => {
+      computerMakesMove(chooseRandomAvailableCell(findAvailableCells()));
+      switchTurn();
+      changeTurnMessage();
+      updateCurrentGameState();
+    }, 500);
+
   }
 }
 
@@ -23,7 +33,7 @@ export function disableCells() {
   document.querySelectorAll('.cell').forEach(cell => cell.disabled = true);
 }
 
-function makeMove(targetCell) {
+export function makeMove(targetCell) {
   targetCell.classList.add('filled');
   targetCell.disabled = true;
 }

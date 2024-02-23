@@ -11,7 +11,7 @@ renderGameState(createDefaultGameState());
 export const RESTART_BTN = document.querySelector('.restart');
 RESTART_BTN.addEventListener('click', createNewGame);
 
-// allows player to play against themselves or with the computer
+// allows player to play against themselves or against the computer
 const playerSelectBtn = document.querySelector('.player-select');
 playerSelectBtn.addEventListener('click', playerSelect);
 

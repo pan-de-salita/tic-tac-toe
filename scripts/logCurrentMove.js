@@ -1,16 +1,7 @@
 import { currentGameRecord } from './updateCurrentGameState.js';
 
-const rowMapping = {
-   0: 'top',
-   1: 'mid',
-   2: 'bottom',
-};
-
-const colMapping = {
-   0: 'left',
-   1: 'center',
-   2: 'right',
-};
+const rowMapping = ['top', 'mid', 'bottom'];
+const colMapping = ['left', 'center', 'right'];
 
 export function logCurrentMove(targetCell) {
   const step = currentGameRecord.length - 1;
@@ -18,7 +9,7 @@ export function logCurrentMove(targetCell) {
   const row = translateRow(Number(targetCell.classList[2][1]));
   const col = translateCol(Number(targetCell.classList[3][1]));
 
-  console.log(`move ${step}: ${cell} placed at ${row}-${col}`);
+  console.log(`${cell} placed at ${row}-${col}`);
 }
 
 function translateRow(x) {
