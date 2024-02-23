@@ -125,7 +125,7 @@ table {
 }
 
 .player-select:hover {
-  box-shadow: 0.5rem 0.5rem 0 0 rgba(55, 52, 52, 0.2509803922);
+  box-shadow: 0.6rem 0.6rem 0 0 rgba(55, 52, 52, 0.2509803922);
 }
 
 .player-select:active {
@@ -174,7 +174,7 @@ table {
   max-height: 24px;
   background: transparent;
   border: none;
-  border-bottom: 2px solid #035668;
+  border-bottom: 0.3rem solid #035668;
   transition: border-width 0.2s ease;
   font-family: "Poppins", sans-serif;
   font-size: 0.9rem;
@@ -184,7 +184,11 @@ table {
 }
 
 .btn:hover {
-  border-width: 0.5rem;
+  border-width: 0.6rem;
+}
+
+.btn:active {
+  transform: scale(0.9);
 }
 
 .back,

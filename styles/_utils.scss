@@ -36,7 +36,7 @@
 }
 
 .player-select:hover {
-    box-shadow: 0.5rem 0.5rem 0 0 c.$txt-color-shadow;
+    box-shadow: 0.6rem 0.6rem 0 0 c.$txt-color-shadow;
 }
 
 .player-select:active {
@@ -91,7 +91,7 @@
     max-height: 24px;
     background: transparent;
     border: none;
-    border-bottom: 2px solid c.$o-color-primary;
+    border-bottom: 0.3rem solid c.$o-color-primary;
     transition: border-width 0.2s ease;
     font-family: 'Poppins', sans-serif;
     font-size: 0.9rem;
@@ -101,7 +101,11 @@
 }
 
 .btn:hover {
-    border-width: 0.5rem;
+    border-width: 0.6rem;
+}
+
+.btn:active {
+    transform: scale(0.9);
 }
 
 .back,

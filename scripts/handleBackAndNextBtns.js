@@ -1,8 +1,8 @@
 import { renderGameState, GAME_DISPLAY } from './renderGameState.js';
 import { currentGameRecord } from './updateCurrentGameState.js';
 
-const BACK_BTN = document.querySelector('.back');
-const NEXT_BTN = document.querySelector('.next');
+export const BACK_BTN = document.querySelector('.back');
+export const NEXT_BTN = document.querySelector('.next');
 let gameRecordIndex;
 
 export function enableGameRecordNavigation() {
