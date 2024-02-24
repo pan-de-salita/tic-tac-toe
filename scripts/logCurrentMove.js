@@ -9,7 +9,7 @@ export function logCurrentMove(targetCell) {
   const row = translateRow(Number(targetCell.classList[2][1]));
   const col = translateCol(Number(targetCell.classList[3][1]));
 
-  console.log(`${cell} placed at ${row}-${col}`);
+  console.log(`${step}: ${cell} at ${row}-${col}`);
 }
 
 function translateRow(x) {

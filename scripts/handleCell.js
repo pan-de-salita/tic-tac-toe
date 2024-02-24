@@ -4,23 +4,28 @@ import { enableGameRecordNavigation } from './handleBackAndNextBtns.js';
 import { changeTurnMessage } from './changeTurnMessage.js';
 import { renderGameResultMessage } from './renderGameResult.js';
 import { logCurrentMove } from './logCurrentMove.js';
-import { computerMakesMove, findAvailableCells, chooseRandomAvailableCell } from './computerMakesMove.js';
+import { computerMakesMove } from './computerMakesMove.js';
 
 export function handleCell(e) {
   let playerMode = document.querySelector('.player-select').textContent;
+
+  // TODO: add styling signalling that user has chosen a game mode
+  // document.querySelector('.player-select').disabled = true;
+
   makeMove(e.target);
   switchTurn();
   changeTurnMessage();
   updateCurrentGameState();
   logCurrentMove(e.target);
 
+  // TODO: rewrite as function
   if (isWin(currentGameState) || isDraw(currentGameState)) {
     disableCells();
     enableGameRecordNavigation();
     renderGameResultMessage(result);
   } else if (playerMode === 'Play against computer') {
     setTimeout(() => {
-      computerMakesMove(chooseRandomAvailableCell(findAvailableCells()));
+      computerMakesMove();
       switchTurn();
       changeTurnMessage();
     }, 700);
