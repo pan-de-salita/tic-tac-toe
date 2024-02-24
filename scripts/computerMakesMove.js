@@ -5,6 +5,17 @@ import { enableGameRecordNavigation } from './handleBackAndNextBtns.js';
 import { renderGameResultMessage } from './renderGameResult.js';
 import { isWin, isDraw, result } from './checkResult.js';
 
+const winPatterns = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
+];
+
 export function computerMakesMove() {
   placeIntoCell(chooseRandomAvailableCell(findAvailableCells()));
 }
@@ -21,9 +32,21 @@ function findAvailableCells() {
   return availableCells;
 }
 
+// TODO: deprecate
 function chooseRandomAvailableCell(availableCells) {
-  const randomIndex = Math.floor(Math.random() * availableCells.length);
-  return availableCells[randomIndex];
+  return availableCells[Math.floor(Math.random() * availableCells.length)];
+}
+
+function findBestAvailableCell(availableCells) {
+  // TODO: assign score per cell
+  return availableCells.reduce((bestAvailableCell, currentCell) => {
+
+  });
+
+  return win(availableCells) || block(availableCells)
+    || fork(availableCells) || blockFork(availableCells)
+    || playCenter(availableCells) || playOppositeCorner(availableCells)
+    || playEmptyCorner(availableCells) || playEmptySide(availableCells);
 }
 
 // TODO: write a function for each:
