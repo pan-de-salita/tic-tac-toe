@@ -1,0 +1,43 @@
+@use 'colors' as c;
+
+.btn-container {
+    display: flex;
+    gap: 3.6rem;
+}
+
+.btn {
+    padding-bottom: 1.4rem;
+    max-height: 24px;
+    background: transparent;
+    border: none;
+    border-bottom: 0.3rem solid c.$o-color-primary;
+    transition: border-width 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: c.$txt-color-primary;
+    cursor: pointer;
+}
+
+.btn:hover {
+    border-width: 0.6rem;
+}
+
+.btn:active {
+    transform: scale(0.9);
+}
+
+.back,
+.next {
+    visibility: hidden;
+    border-color: c.$x-color-primary;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

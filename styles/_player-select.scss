@@ -1,0 +1,29 @@
+@use 'colors' as c;
+
+.player-select {
+    background: transparent;
+    padding: 0.2rem 0.7rem;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: c.$txt-color-primary;
+    cursor: pointer;
+    border: none;
+    border: 2px solid c.$x-color-primary;
+    box-shadow: 0.3rem 0.3rem 0 0 c.$txt-color-shadow;
+    border-radius: 10px;
+}
+
+.player-select:hover {
+    box-shadow: 0.6rem 0.6rem 0 0 c.$txt-color-shadow;
+}
+
+.player-select:active {
+    transform: scale(0.9);
+}
+
+.player-select.locked {
+    background: transparent;
+}

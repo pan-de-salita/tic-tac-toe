@@ -52,6 +52,38 @@ table {
   border-spacing: 0;
 }
 
+body {
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #FFFDD0;
+}
+
+header {
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer {
+  height: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .game-container {
   display: grid;
   grid-template-columns: repeat(3, 6.25rem);
@@ -93,22 +125,6 @@ table {
   border: 18px solid #035668;
 }
 
-.game-title-container {
-  padding-bottom: 1.5rem;
-}
-.game-title-container .game-title {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.7rem;
-  font-weight: bold;
-  color: #373434;
-}
-.game-title-container .red-text {
-  color: #D45757;
-}
-.game-title-container .blue-text {
-  color: #035668;
-}
-
 .player-select {
   background: transparent;
   padding: 0.2rem 0.7rem;
@@ -130,6 +146,10 @@ table {
 
 .player-select:active {
   transform: scale(0.9);
+}
+
+.player-select.locked {
+  background: transparent;
 }
 
 .msg-container {
@@ -166,7 +186,7 @@ table {
 
 .btn-container {
   display: flex;
-  gap: 3.8rem;
+  gap: 3.6rem;
 }
 
 .btn {
@@ -205,36 +225,20 @@ table {
     opacity: 1;
   }
 }
-body {
-  width: 100dvw;
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #FFFDD0;
+.game-title-container {
+  padding-bottom: 1.5rem;
 }
-
-header {
-  height: 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+.game-title-container .game-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #373434;
 }
-
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+.game-title-container .red-text {
+  color: #D45757;
 }
-
-footer {
-  height: 15%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+.game-title-container .blue-text {
+  color: #035668;
 }
 
 /*# sourceMappingURL=styles.css.map */

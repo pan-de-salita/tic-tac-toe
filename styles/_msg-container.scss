@@ -1,0 +1,39 @@
+@use 'colors' as c;
+
+.msg-container {
+    position: relative;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    padding-bottom: 3rem;
+    font-size: 2rem;
+    font-weight: 900;
+    font-style: italic;
+    color: c.$txt-color-primary;
+    overflow: hidden;
+
+    .msg {
+        position: absolute;
+        transform: translateX(-50%);
+        transition: left 0.5s ease;
+    }
+
+    .x-move {
+        left: 50%;
+    }
+
+    .o-move {
+        left: 200%;
+    }
+
+    .result {
+        left: 50%;
+    }
+
+    .red-text {
+        color: c.$x-color-primary;
+    }
+
+    .blue-text {
+        color: c.$o-color-primary;
+    }
+}
