@@ -85,7 +85,7 @@ function placeIntoCell(availableCellIndex) {
   let targetCell = cells[availableCellIndex];
 
   makeMove(targetCell);
-  updateCurrentGameState();
+  updateCurrentGameState(targetCell);
   logCurrentMove(targetCell);
 
   // TODO: rewrite as function

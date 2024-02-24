@@ -22,18 +22,18 @@ function updateCurrentGameRecord() {
   currentGameRecord.push(currentGameState);
 }
 
-function createNewGameState(cell) {
+function createNewGameState(targetCell) {
   const newSymbol = !(currentGameRecord.length % 2 === 0) ? 'x' : 'o';
-  const targetRow = Number(cell.getAttribute('x'));
-  const targetCol = Number(cell.getAttribute('y'));
+  const targetRow = Number(targetCell.getAttribute('x'));
+  const targetCol = Number(targetCell.getAttribute('y'));
 
   currentGameState = currentGameState.map((subArray, i) =>
-    subArray.map((symbol, j) => {
+    subArray.map((_, j) => {
       if (i === targetRow && j === targetCol) {
         return newSymbol;
       }
 
-      return symbol;
+      return subArray[j];
     })
   );
 }
