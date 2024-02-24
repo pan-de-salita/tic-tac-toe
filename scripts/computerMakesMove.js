@@ -37,17 +37,17 @@ function chooseRandomAvailableCell(availableCells) {
   return availableCells[Math.floor(Math.random() * availableCells.length)];
 }
 
-function findBestAvailableCell(availableCells) {
-  // TODO: assign score per cell
-  return availableCells.reduce((bestAvailableCell, currentCell) => {
+// function findBestAvailableCell(availableCells) {
+//   // TODO: assign score per cell
+//   return availableCells.reduce((bestAvailableCell, currentCell) => {
 
-  });
+//   });
 
-  return win(availableCells) || block(availableCells)
-    || fork(availableCells) || blockFork(availableCells)
-    || playCenter(availableCells) || playOppositeCorner(availableCells)
-    || playEmptyCorner(availableCells) || playEmptySide(availableCells);
-}
+//   return win(availableCells) || block(availableCells)
+//     || fork(availableCells) || blockFork(availableCells)
+//     || playCenter(availableCells) || playOppositeCorner(availableCells)
+//     || playEmptyCorner(availableCells) || playEmptySide(availableCells);
+// }
 
 // TODO: write a function for each:
 // Win: If the player has two in a row, they can place a third to get
