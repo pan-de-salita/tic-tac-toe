@@ -4,6 +4,7 @@ import { refreshTurnMessage } from './changeTurnMessage.js';
 import { clearGameResultMessage } from './renderGameResult.js';
 import { refreshResult } from './checkResult.js';
 import { hideBtn, BACK_BTN, NEXT_BTN } from './handleBackAndNextBtns.js';
+import { unlockPlayerSelect } from './handlePlayerSelect.js';
 
 export const GAME_DISPLAY = document.querySelector('.game-container');
 
@@ -20,7 +21,7 @@ function renderCell(cell, rowIndex, cellIndex) {
     cellElement.setAttribute('x', rowIndex.toString());
     cellElement.setAttribute('y', cellIndex.toString());
     cellElement.addEventListener('click', handleCell);
-  } else {
+  } else { // handles rendering for navigating between game states post-game
     cellElement.classList.toggle(`${cell === 'x' ? 'x-symbol' : 'o-symbol'}`);
     cellElement.classList.toggle('filled');
     cellElement.setAttribute('x', rowIndex.toString());
@@ -37,6 +38,7 @@ export function createNewGame() {
 
   clearCurrentGameState();
   clearCurrentGameRecord();
+  unlockPlayerSelect();
   clearGameResultMessage();
   refreshResult();
   refreshTurnMessage();

@@ -5,40 +5,40 @@ import { changeTurnMessage } from './changeTurnMessage.js';
 import { renderGameResultMessage } from './renderGameResult.js';
 import { logCurrentMove } from './logCurrentMove.js';
 import { computerMakesMove } from './computerMakesMove.js';
+import { lockPlayerSelect } from './handlePlayerSelect.js';
 
 export function handleCell(e) {
-  let playerMode = document.querySelector('.player-select').textContent;
+  const playerMode = document.querySelector('.player-select').textContent;
 
-  // TODO: add styling signalling that user has chosen a game mode
-  // document.querySelector('.player-select').disabled = true;
-
+  lockPlayerSelect();
   makeMove(e.target);
   switchTurn();
   changeTurnMessage();
   updateCurrentGameState(e.target);
   logCurrentMove(e.target);
 
-  // TODO: rewrite as function
   if (isWin(currentGameState) || isDraw(currentGameState)) {
     disableCells();
     enableGameRecordNavigation();
     renderGameResultMessage(result);
-  } else if (playerMode === 'Play against computer') {
-    setTimeout(() => {
-      computerMakesMove();
-      switchTurn();
-      changeTurnMessage();
-    }, 700);
+  } else {
+    if (playerMode === 'Play against computer') {
+      setTimeout(() => {
+        computerMakesMove();
+        switchTurn();
+        changeTurnMessage();
+      }, 666); // devil in the details
+    }
   }
 }
 
 export function disableCells() {
-  document.querySelectorAll('.cell').forEach(cell => cell.disabled = true);
+  document.querySelectorAll('.cell').forEach(cell => cell.removeEventListener('click', handleCell));
 }
 
 export function makeMove(targetCell) {
   targetCell.classList.add('filled');
-  targetCell.disabled = true;
+  targetCell.removeEventListener('click', handleCell);
 }
 
 function switchTurn() {

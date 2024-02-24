@@ -24,6 +24,20 @@
     transform: scale(0.9);
 }
 
-.player-select.locked {
-    background: transparent;
+.player-select.computer {
+    border-color: c.$x-color-primary;
+}
+
+.player-select.computer.locked {
+    background-color: c.$x-color-primary;
+    color: white;
+}
+
+.player-select.self {
+    border-color: c.$o-color-primary;
+}
+
+.player-select.self.locked {
+    background-color: c.$o-color-primary;
+    color: white;
 }
