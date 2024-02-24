@@ -6,8 +6,8 @@ const colMapping = ['left', 'center', 'right'];
 export function logCurrentMove(targetCell) {
   const step = currentGameRecord.length - 1;
   const cell = targetCell.classList[1][0];
-  const row = translateRow(Number(targetCell.classList[2][1]));
-  const col = translateCol(Number(targetCell.classList[3][1]));
+  const row = translateRow(Number(targetCell.getAttribute('x')));
+  const col = translateCol(Number(targetCell.getAttribute('y')));
 
   console.log(`${step}: ${cell} at ${row}-${col}`);
 }

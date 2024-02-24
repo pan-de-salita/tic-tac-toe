@@ -16,13 +16,15 @@ function renderCell(cell, rowIndex, cellIndex) {
   cellElement.classList.add('cell');
 
   if (!cell) {
-    cellElement.classList.add('x-symbol', `x${rowIndex}`, `y${cellIndex}`);
+    cellElement.classList.add('x-symbol');
+    cellElement.setAttribute('x', rowIndex.toString());
+    cellElement.setAttribute('y', cellIndex.toString());
     cellElement.addEventListener('click', handleCell);
   } else {
     cellElement.classList.toggle(`${cell === 'x' ? 'x-symbol' : 'o-symbol'}`);
     cellElement.classList.toggle('filled');
-    cellElement.classList.toggle(`x${rowIndex}`);
-    cellElement.classList.toggle(`y${cellIndex}`);
+    cellElement.setAttribute('x', rowIndex.toString());
+    cellElement.setAttribute('y', cellIndex.toString());
   }
 
   GAME_DISPLAY.append(cellElement);

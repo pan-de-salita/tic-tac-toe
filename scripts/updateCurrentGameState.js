@@ -5,9 +5,8 @@ export function createDefaultGameState() {
   return Array(3).fill().map(() => Array(3).fill());
 }
 
-export function updateCurrentGameState() {
-  clearCurrentGameState();
-  createNewGameState(document.querySelectorAll('.cell'));
+export function updateCurrentGameState(targetCell) {
+  createNewGameState(targetCell);
   updateCurrentGameRecord();
 }
 
@@ -19,20 +18,22 @@ export function clearCurrentGameState() {
   currentGameState = createDefaultGameState();
 }
 
-function createNewGameState(cells) {
-  currentGameState = currentGameState.map((subArray, i) =>
-    subArray.map((_, j) => {
-      const cellIndex = i * currentGameState.length + j;
-
-      if (cells[cellIndex].classList.contains('filled')) {
-        return cells[cellIndex].classList.contains('x-symbol') ? 'x' : 'o';
-      }
-
-      return subArray[j];
-    })
-  );
-}
-
 function updateCurrentGameRecord() {
   currentGameRecord.push(currentGameState);
+}
+
+function createNewGameState(cell) {
+  const newSymbol = !(currentGameRecord.length % 2 === 0) ? 'x' : 'o';
+  const targetRow = Number(cell.getAttribute('x'));
+  const targetCol = Number(cell.getAttribute('y'));
+
+  currentGameState = currentGameState.map((subArray, i) =>
+    subArray.map((symbol, j) => {
+      if (i === targetRow && j === targetCol) {
+        return newSymbol;
+      }
+
+      return symbol;
+    })
+  );
 }

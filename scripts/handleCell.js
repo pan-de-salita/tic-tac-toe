@@ -15,7 +15,7 @@ export function handleCell(e) {
   makeMove(e.target);
   switchTurn();
   changeTurnMessage();
-  updateCurrentGameState();
+  updateCurrentGameState(e.target);
   logCurrentMove(e.target);
 
   // TODO: rewrite as function
