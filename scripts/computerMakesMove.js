@@ -4,6 +4,7 @@ import { logCurrentMove } from './logCurrentMove.js';
 import { enableGameRecordNavigation } from './handleBackAndNextBtns.js';
 import { renderGameResultMessage } from './renderGameResult.js';
 import { isWin, isDraw, result } from './checkResult.js';
+import { showCredit } from './showCredit.js';
 
 const winPatterns = [
   [0, 1, 2],
@@ -93,5 +94,6 @@ function placeIntoCell(availableCellIndex) {
     disableCells();
     enableGameRecordNavigation();
     renderGameResultMessage(result);
+    showCredit();
   }
 }

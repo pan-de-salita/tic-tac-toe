@@ -1,0 +1,42 @@
+@use 'colors' as c;
+
+.credit-container {
+    padding-bottom: 0.5rem;
+
+    .credit-link {
+        text-decoration: none;
+        visibility: hidden;
+
+        .credit-txt {
+            padding: 0.2rem;
+            transition: background 0.2s ease,
+                        border 0.2s ease,
+                        transform 0.2s ease,;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: c.$txt-color-primary;
+            background: none;
+            border-bottom: 2px solid c.$txt-color-primary;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .credit-txt:hover {
+            background: c.$x-color-shadow;
+            border-color: c.$bg-color-primary;
+        }
+
+        .credit-txt:active {
+            transform: scale(0.9);
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

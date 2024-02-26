@@ -5,6 +5,7 @@ import { clearGameResultMessage } from './renderGameResult.js';
 import { refreshResult } from './checkResult.js';
 import { hideBtn, BACK_BTN, NEXT_BTN } from './handleBackAndNextBtns.js';
 import { unlockPlayerSelect } from './handlePlayerSelect.js';
+import { hideCredit } from './showCredit.js';
 
 export const GAME_DISPLAY = document.querySelector('.game-container');
 
@@ -36,6 +37,7 @@ export function createNewGame() {
 
   GAME_DISPLAY.innerHTML = '';
 
+  hideCredit();
   clearCurrentGameState();
   clearCurrentGameRecord();
   unlockPlayerSelect();

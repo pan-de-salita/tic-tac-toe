@@ -37,3 +37,12 @@
         color: c.$o-color-primary;
     }
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -10,7 +10,6 @@
     font-weight: 500;
     color: c.$txt-color-primary;
     cursor: pointer;
-    border: none;
     border: 2px solid c.$x-color-primary;
     box-shadow: 0.3rem 0.3rem 0 0 c.$txt-color-shadow;
     border-radius: 10px;
@@ -30,7 +29,6 @@
 
 .player-select.computer.locked {
     background-color: c.$x-color-primary;
-    color: white;
 }
 
 .player-select.self {
@@ -39,5 +37,8 @@
 
 .player-select.self.locked {
     background-color: c.$o-color-primary;
+}
+
+.locked {
     color: white;
 }

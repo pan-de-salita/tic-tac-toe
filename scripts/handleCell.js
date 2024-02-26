@@ -6,6 +6,7 @@ import { renderGameResultMessage } from './renderGameResult.js';
 import { logCurrentMove } from './logCurrentMove.js';
 import { computerMakesMove } from './computerMakesMove.js';
 import { lockPlayerSelect } from './handlePlayerSelect.js';
+import { showCredit } from './showCredit.js';
 
 export function handleCell(e) {
   const playerMode = document.querySelector('.player-select').textContent;
@@ -21,6 +22,7 @@ export function handleCell(e) {
     disableCells();
     enableGameRecordNavigation();
     renderGameResultMessage(result);
+    showCredit();
   } else {
     if (playerMode === 'Play against computer') {
       setTimeout(() => {
