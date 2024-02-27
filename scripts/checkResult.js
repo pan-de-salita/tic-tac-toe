@@ -37,7 +37,7 @@ function checkForWin(gameState) {
   return false;
 }
 
-function reorientVertical(gameState) {
+export function reorientVertical(gameState) {
   let reorientedGameState = createDefaultGameState();
 
   for (let i = 0; i < gameState.length; i++) {
@@ -49,7 +49,7 @@ function reorientVertical(gameState) {
   return reorientedGameState;
 }
 
-function makeDiagonal(gameState) {
+export function makeDiagonal(gameState) {
   const rows = gameState.length;
   const cols = gameState[0].length;
   let leftDiagonal = [];

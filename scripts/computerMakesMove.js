@@ -1,9 +1,9 @@
-import { currentGameState, currentGameRecord, updateCurrentGameState } from './updateCurrentGameState.js';
+import { currentGameState, currentGameRecord, updateCurrentGameState, createDefaultGameState } from './updateCurrentGameState.js';
 import { disableCells, makeMove } from './handleCell.js';
 import { logCurrentMove } from './logCurrentMove.js';
 import { enableGameRecordNavigation } from './handleBackAndNextBtns.js';
 import { renderGameResultMessage } from './renderGameResult.js';
-import { isWin, isDraw, result } from './checkResult.js';
+import { isWin, isDraw, result, reorientVertical, makeDiagonal } from './checkResult.js';
 import { showCredit } from './showCredit.js';
 
 const winPatterns = [
@@ -18,41 +18,179 @@ const winPatterns = [
 ];
 
 export function computerMakesMove() {
-  placeIntoCell(chooseRandomAvailableCell(findAvailableCells()));
+  placeIntoCell(
+    chooseRandomAvailableCell(findAvailableCells(),
+                              findUnavailableCells())
+  );
 }
 
 function findAvailableCells() {
-  let availableCells = [];
+  let availableCells = createDefaultGameState();
 
-  currentGameState.flat().forEach((cell, i) => {
-    if (!cell) {
-      return availableCells.push(i);
-    }
-  });
+  currentGameState.forEach((subArray, i) =>
+    subArray.forEach((_, j) => {
+      if (!subArray[j]) {
+        availableCells[i][j] = i * subArray.length + j;
+      } else {
+        availableCells[i][j] = undefined;
+      }
+    })
+  );
 
+  // console.log(availableCells);
   return availableCells;
 }
 
-// TODO: deprecate
-function chooseRandomAvailableCell(availableCells) {
-  return availableCells[Math.floor(Math.random() * availableCells.length)];
+function findUnavailableCells() {
+  let unavailableCells = createDefaultGameState();
+
+  currentGameState.forEach((subArray, i) =>
+    subArray.forEach((_, j) => {
+      if (subArray[j]) {
+        unavailableCells[i][j] = i * subArray.length + j;
+      } else {
+        unavailableCells[i][j] = undefined;
+      }
+    })
+  );
+
+  // console.log(unavailableCells);
+  return unavailableCells;
 }
 
-// function findBestAvailableCell(availableCells) {
-//   // TODO: assign score per cell
-//   return availableCells.reduce((bestAvailableCell, currentCell) => {
+function findCellsOccupiedByX() {
+  let cellsOccupiedByX = createDefaultGameState();
 
-//   });
+  currentGameState.forEach((subArray, i) =>
+    subArray.forEach((_, j) => {
+      if (subArray[j] === 'x') {
+        cellsOccupiedByX[i][j] = i * subArray.length + j;
+      } else {
+        cellsOccupiedByX[i][j] = undefined;
+      }
+    })
+  );
 
-//   return win(availableCells) || block(availableCells)
-//     || fork(availableCells) || blockFork(availableCells)
-//     || playCenter(availableCells) || playOppositeCorner(availableCells)
-//     || playEmptyCorner(availableCells) || playEmptySide(availableCells);
-// }
+  // console.log(cellsOccupiedByX);
+  return cellsOccupiedByX;
+}
+
+function findCellsOccupiedByO() {
+  let cellsOccupiedByO = createDefaultGameState();
+
+  currentGameState.forEach((subArray, i) =>
+    subArray.forEach((_, j) => {
+      if (subArray[j] === 'o') {
+        cellsOccupiedByO[i][j] = i * subArray.length + j;
+      } else {
+        cellsOccupiedByO[i][j] = undefined;
+      }
+    })
+  );
+
+  // console.log(cellsOccupiedByO);
+  return cellsOccupiedByO;
+}
+
+function chooseRandomAvailableCell(availableCells) {
+  let candidate = getRandomAvailableCell(availableCells);
+
+  if (candidate) {
+    return candidate;
+  } else {
+    return chooseRandomAvailableCell(availableCells);
+  }
+}
+
+function getRandomAvailableCell(availableCells) {
+  return availableCells[Math.floor(Math.random() * availableCells.length)][Math.floor(Math.random() * availableCells.length)];
+}
+
+function findBestAvailableCell(availableCells) {
+
+  return availableCells.reduce((bestAvailableCell, currentCell) => {
+    let scoreForCurrentCell = 0;
+    const unAvailableCells = findUnavailableCells();
+
+    if (canWin(currentCell)) {
+      scoreForCurrentCell = 10;
+    }
+  });
+
+  // return win(availableCells) || block(availableCells)
+  //   || fork(availableCells) || blockFork(availableCells)
+  //   || playCenter(availableCells) || playOppositeCorner(availableCells)
+  //   || playEmptyCorner(availableCells) || playEmptySide(availableCells);
+}
 
 // TODO: write a function for each:
 // Win: If the player has two in a row, they can place a third to get
 // three in a row.
+function canWin(cell) {
+  const cellsByO = findCellsOccupiedByO();
+  const cellsByX = findCellsOccupiedByX();
+
+  for (let i = 0; i < cellsByO.length; i++) {
+    for (let j = 0; j < cellsByX.length; j++) {
+      if (cellsByO[i][j] === undefined && cellsByX[i][j] === undefined) {
+        cellsByO[i][j] = cell;
+      }
+    }
+  }
+
+  let result = false;
+
+  for (let i = 0; i < cellsByO.length; i++) {
+    // console.log(cellsByO.length);
+    // console.log(cellsByO[i]);
+    if (winPatterns.some(pattern =>
+      pattern.length === 3
+        && pattern[0] === cellsByO[i][0]
+        && pattern[1] === cellsByO[i][1]
+        && pattern[2] === cellsByO[i][2])) {
+      result = true;
+      console.log(cellsByO[i]);
+      console.log(`winnable: ${result}`);
+      console.log(cell);
+      return cell;
+    }
+  }
+
+  const verticalCellsByO = reorientVertical(cellsByO);
+  for (let i = 0; i < verticalCellsByO.length; i++) {
+    // console.log(cellsByO.length);
+    // console.log(cellsByO[i]);
+    if (winPatterns.some(pattern =>
+      pattern.length === 3
+        && pattern[0] === verticalCellsByO[i][0]
+        && pattern[1] === verticalCellsByO[i][1]
+        && pattern[2] === verticalCellsByO[i][2])) {
+      result = true;
+      console.log(verticalCellsByO[i]);
+      console.log(`winnable: ${result}`);
+      console.log(cell);
+      return cell;
+    }
+  }
+
+  const diagonalCellsByO = makeDiagonal(cellsByO);
+  for (let i = 0; i < diagonalCellsByO.length; i++) {
+    // console.log(cellsByO.length);
+    // console.log(cellsByO[i]);
+    if (winPatterns.some(pattern =>
+      pattern.length === 3
+        && pattern[0] === diagonalCellsByO[i][0]
+        && pattern[1] === diagonalCellsByO[i][1]
+        && pattern[2] === diagonalCellsByO[i][2])) {
+      result = true;
+      console.log(diagonalCellsByO[i]);
+      console.log(`winnable: ${result}`);
+      console.log(cell);
+      return cell;
+    }
+  }
+}
+
 
 // Block: If the opponent has two in a row, the player must play the
 // third themselves to block the opponent.
@@ -83,7 +221,19 @@ function chooseRandomAvailableCell(availableCells) {
 
 function placeIntoCell(availableCellIndex) {
   const cells = document.querySelectorAll('.cell');
+
+  findAvailableCells().flat().forEach(index => {
+    if ((typeof index) === 'number') {
+      if (canWin(index)) {
+        availableCellIndex = canWin(index);
+        console.log(availableCellIndex);
+        return availableCellIndex;
+      }
+    }
+  });
+
   let targetCell = cells[availableCellIndex];
+
 
   makeMove(targetCell);
   updateCurrentGameState(targetCell);
