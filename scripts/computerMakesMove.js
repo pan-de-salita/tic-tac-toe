@@ -138,36 +138,28 @@ function canWin(cell) {
     }
   }
 
-  let result = false;
-
   for (let i = 0; i < cellsByO.length; i++) {
     // console.log(cellsByO.length);
     // console.log(cellsByO[i]);
+    let result = false;
     if (winPatterns.some(pattern =>
       pattern.length === 3
         && pattern[0] === cellsByO[i][0]
         && pattern[1] === cellsByO[i][1]
         && pattern[2] === cellsByO[i][2])) {
       result = true;
-      console.log(cellsByO[i]);
-      console.log(`winnable: ${result}`);
-      console.log(cell);
+      console.log(`O winnable? ${result}`)
       return cell;
     }
   }
 
   const verticalCellsByO = reorientVertical(cellsByO);
   for (let i = 0; i < verticalCellsByO.length; i++) {
-    console.log(verticalCellsByO);
     if (winPatterns.some(pattern =>
       pattern.length === 3
         && pattern[0] === verticalCellsByO[i][0]
         && pattern[1] === verticalCellsByO[i][1]
         && pattern[2] === verticalCellsByO[i][2])) {
-      result = true;
-      console.log(verticalCellsByO[i]);
-      console.log(`winnable: ${result}`);
-      console.log(cell);
       return cell;
     }
   }
@@ -181,18 +173,60 @@ function canWin(cell) {
         && pattern[0] === diagonalCellsByO[i][0]
         && pattern[1] === diagonalCellsByO[i][1]
         && pattern[2] === diagonalCellsByO[i][2])) {
-      result = true;
-      console.log(diagonalCellsByO[i]);
-      console.log(`winnable: ${result}`);
-      console.log(cell);
       return cell;
     }
   }
 }
 
-
 // Block: If the opponent has two in a row, the player must play the
 // third themselves to block the opponent.
+function canBlock(cell) {
+  const cellsByO = findCellsOccupiedByO();
+  const cellsByX = findCellsOccupiedByX();
+
+  for (let i = 0; i < cellsByO.length; i++) {
+    for (let j = 0; j < cellsByX.length; j++) {
+      if (cellsByO[i][j] === undefined && cellsByX[i][j] === undefined) {
+        cellsByX[i][j] = cell;
+      }
+    }
+  }
+
+  for (let i = 0; i < cellsByX.length; i++) {
+    // console.log(cellsByO.length);
+    // console.log(cellsByX[i]);
+    if (winPatterns.some(pattern =>
+      pattern.length === 3
+        && pattern[0] === cellsByX[i][0]
+        && pattern[1] === cellsByX[i][1]
+        && pattern[2] === cellsByX[i][2])) {
+      // console.log(`X winnable? ${true}`);
+      return cell;
+    }
+  }
+
+  const verticalCellsByX = reorientVertical(cellsByX);
+  for (let i = 0; i < verticalCellsByX.length; i++) {
+    if (winPatterns.some(pattern =>
+      pattern.length === 3
+        && pattern[0] === verticalCellsByX[i][0]
+        && pattern[1] === verticalCellsByX[i][1]
+        && pattern[2] === verticalCellsByX[i][2])) {
+      return cell;
+    }
+  }
+
+  const diagonalCellsByX = makeDiagonal(cellsByX);
+  for (let i = 0; i < diagonalCellsByX.length; i++) {
+    if (winPatterns.some(pattern =>
+      pattern.length === 3
+        && pattern[0] === diagonalCellsByX[i][0]
+        && pattern[1] === diagonalCellsByX[i][1]
+        && pattern[2] === diagonalCellsByX[i][2])) {
+      return cell;
+    }
+  }
+}
 
 // Fork: Cause a scenario where the player has two ways to win (two
 // non-blocked lines of 2).
@@ -220,19 +254,44 @@ function canWin(cell) {
 
 function placeIntoCell(availableCellIndex) {
   const cells = document.querySelectorAll('.cell');
+  const flattenedAvailableCells = findAvailableCells().flat();
+  // console.log(flattenedAvailableCells);
 
   findAvailableCells().flat().forEach(index => {
     if ((typeof index) === 'number') {
-      if (canWin(index)) {
-        availableCellIndex = canWin(index);
-        console.log(availableCellIndex);
+      if (canBlock(index)) {
+        availableCellIndex = canBlock(index);
+        console.log(`canBlock: ${availableCellIndex}`);
         return availableCellIndex;
       }
     }
   });
 
-  let targetCell = cells[availableCellIndex];
+  findAvailableCells().flat().forEach(index => {
+    if ((typeof index) === 'number') {
+      if (canWin(index)) {
+        availableCellIndex = canWin(index);
+        console.log(`canWin: ${availableCellIndex}`);
+        return availableCellIndex;
+      }
+    }
+  });
 
+
+
+  // for (let i = 0; i < flattenedAvailableCells.length; i++) {
+  //   if ((typeof flattenedAvailableCells[i]) === 'number') {
+  //     if (canWin(flattenedAvailableCells[i])) {
+  //       availableCellIndex = flattenedAvailableCells[i];
+  //       break;
+  //     } else if (canBlock(flattenedAvailableCells[i])) {
+  //       availableCellIndex = flattenedAvailableCells[i];
+  //       break;
+  //     }
+  //   }
+  // }
+
+  let targetCell = cells[availableCellIndex];
 
   makeMove(targetCell);
   updateCurrentGameState(targetCell);
