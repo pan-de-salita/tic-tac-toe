@@ -42,7 +42,7 @@ export function reorientVertical(gameState) {
 
   for (let i = 0; i < gameState.length; i++) {
     for (let j = 0; j < gameState.length; j++) {
-      reorientedGameState[i].push(gameState[j][i]);
+      reorientedGameState[i][j] = gameState[j][i];
     }
   }
 

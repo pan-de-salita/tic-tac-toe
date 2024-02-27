@@ -158,8 +158,7 @@ function canWin(cell) {
 
   const verticalCellsByO = reorientVertical(cellsByO);
   for (let i = 0; i < verticalCellsByO.length; i++) {
-    // console.log(cellsByO.length);
-    // console.log(cellsByO[i]);
+    console.log(verticalCellsByO);
     if (winPatterns.some(pattern =>
       pattern.length === 3
         && pattern[0] === verticalCellsByO[i][0]
