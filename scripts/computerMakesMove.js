@@ -217,12 +217,15 @@ function canBlock(cell) {
   }
 
   const diagonalCellsByX = makeDiagonal(cellsByX);
+  console.log(diagonalCellsByX);
   for (let i = 0; i < diagonalCellsByX.length; i++) {
     if (winPatterns.some(pattern =>
       pattern.length === 3
         && pattern[0] === diagonalCellsByX[i][0]
         && pattern[1] === diagonalCellsByX[i][1]
         && pattern[2] === diagonalCellsByX[i][2])) {
+      console.log(diagonalCellsByX[i]);
+      console.log(cell);
       return cell;
     }
   }
@@ -259,9 +262,10 @@ function placeIntoCell(availableCellIndex) {
 
   findAvailableCells().flat().forEach(index => {
     if ((typeof index) === 'number') {
-      if (canBlock(index)) {
+      if (canBlock(index) >= 0) {
         availableCellIndex = canBlock(index);
         console.log(`canBlock: ${availableCellIndex}`);
+        console.log(availableCellIndex);
         return availableCellIndex;
       }
     }
@@ -269,15 +273,13 @@ function placeIntoCell(availableCellIndex) {
 
   findAvailableCells().flat().forEach(index => {
     if ((typeof index) === 'number') {
-      if (canWin(index)) {
+      if (canWin(index) >= 0) {
         availableCellIndex = canWin(index);
         console.log(`canWin: ${availableCellIndex}`);
         return availableCellIndex;
       }
     }
   });
-
-
 
   // for (let i = 0; i < flattenedAvailableCells.length; i++) {
   //   if ((typeof flattenedAvailableCells[i]) === 'number') {
