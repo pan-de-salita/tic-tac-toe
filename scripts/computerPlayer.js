@@ -119,6 +119,17 @@ export function canBlock(cell) {
 // result in them producing a fork. For example, if "X" has two opposite
 // corners and "O" has the center, "O" must not play a corner move to
 // win. (Playing a corner move in this scenario produces a fork for "X" to win.)
+export function canBlockFork(cell) {
+  const cellsByO = findCellsOccupiedByO();
+  const cellsByX = findCellsOccupiedByX();
+
+  if ((cell === 0 && cellsByX[0][1] && cellsByX[1][0])
+     || (cell === 2 && cellsByX[0][1] && cellsByX[1][2])
+     || (cell === 6 && cellsByX[1][0] && cellsByX[2][1])
+     || (cell === 8 && cellsByX[1][2] && cellsByX[2][1])) {
+    return cell;
+  }
+}
 
 // Center: A player marks the center. (If it is the first move of the
 // game, playing a corner move gives the second player more opportunities
@@ -141,9 +152,9 @@ export function canPlaceInOppositeCorner(cell) {
   const cellsByO = findCellsOccupiedByO();
   const cellsByX = findCellsOccupiedByX();
 
-  if ((cell === 0 && cellsByX[2][8])
+  if ((cell === 0 && cellsByX[2][2])
       || (cell === 8 && cellsByX[0][0])
-      || (cell === 2 && cellsByX[2][6])
+      || (cell === 2 && cellsByX[2][0])
       || (cell === 6 && cellsByX[0][2])) {
     return cell;
   }
@@ -154,9 +165,9 @@ export function canPlaceInCorner(cell) {
   const cellsByO = findCellsOccupiedByO();
   const cellsByX = findCellsOccupiedByX();
 
-  if ((cell === 0 && !cellsByX[2][8])
+  if ((cell === 0 && !cellsByX[2][2])
       || (cell === 8 && !cellsByX[0][0])
-      || (cell === 2 && !cellsByX[2][6])
+      || (cell === 2 && !cellsByX[2][0])
       || (cell === 6 && !cellsByX[0][2])) {
     return cell;
   }

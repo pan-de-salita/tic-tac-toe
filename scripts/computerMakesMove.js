@@ -6,7 +6,7 @@ import { renderGameResultMessage } from './renderGameResult.js';
 import { showCredit } from './showCredit.js';
 import { findAvailableCells, findUnavailableCells, findCellsOccupiedByX, findCellsOccupiedByO } from './findCellsForComputer.js';
 import { isWin, isDraw, result, reorientVertical, makeDiagonal } from './checkResult.js';
-import { canPlaceInCenter, canPlaceInOppositeCorner, canPlaceInCorner, canWin, canBlock } from './computerPlayer.js';
+import { canPlaceInCenter, canPlaceInOppositeCorner, canBlockFork, canPlaceInCorner, canWin, canBlock } from './computerPlayer.js';
 
 export function computerMakesMove() {
   placeIntoCell(findAvailableCells());
@@ -44,6 +44,16 @@ function placeIntoCell(availableCells) {
       if (placeInOppositeCornerCandidate >= 0) {
         console.log(`can place in opposite corner ${placeInOppositeCornerCandidate}`);
         return targetCellIndex = placeInOppositeCornerCandidate;
+      }
+    }
+  });
+
+  flattenedAvailableCells.forEach(index => {
+    if ((typeof index) === 'number') {
+      let blockForkCandidate = canBlockFork(index);
+      if (blockForkCandidate >= 0) {
+        console.log(`can block fork ${blockForkCandidate}`);
+        return targetCellIndex = blockForkCandidate;
       }
     }
   });
