@@ -50,20 +50,20 @@ function placeIntoCell(availableCells) {
 
   flattenedAvailableCells.forEach(index => {
     if ((typeof index) === 'number') {
-      let blockForkCandidate = canBlockFork(index);
-      if (blockForkCandidate >= 0) {
-        console.log(`can block fork ${blockForkCandidate}`);
-        return targetCellIndex = blockForkCandidate;
+      let placeInCenterCandidate = canPlaceInCenter(index);
+      if (placeInCenterCandidate === 4) {
+        console.log(`can place in center ${placeInCenterCandidate}`);
+        return targetCellIndex = placeInCenterCandidate;
       }
     }
   });
 
   flattenedAvailableCells.forEach(index => {
     if ((typeof index) === 'number') {
-      let placeInCenterCandidate = canPlaceInCenter(index);
-      if (placeInCenterCandidate === 4) {
-        console.log(`can place in center ${placeInCenterCandidate}`);
-        return targetCellIndex = placeInCenterCandidate;
+      let blockForkCandidate = canBlockFork(index);
+      if (blockForkCandidate >= 0) {
+        console.log(`can block fork ${blockForkCandidate}`);
+        return targetCellIndex = blockForkCandidate;
       }
     }
   });

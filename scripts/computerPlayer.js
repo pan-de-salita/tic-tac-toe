@@ -123,10 +123,12 @@ export function canBlockFork(cell) {
   const cellsByO = findCellsOccupiedByO();
   const cellsByX = findCellsOccupiedByX();
 
-  if ((cell === 0 && cellsByX[0][1] && cellsByX[1][0])
-     || (cell === 2 && cellsByX[0][1] && cellsByX[1][2])
-     || (cell === 6 && cellsByX[1][0] && cellsByX[2][1])
-     || (cell === 8 && cellsByX[1][2] && cellsByX[2][1])) {
+  if ((cell === 0 && cellsByX[0][1] === 1 && cellsByX[1][0] === 3)
+      || (cell === 2 && cellsByX[0][1] === 1 && cellsByX[1][2] === 5)
+      || (cell === 6 && cellsByX[1][0] === 3 && cellsByX[2][1] === 7)
+      || (cell === 8 && cellsByX[1][2] === 5 && cellsByX[2][1] === 7)
+      || ((cell % 2 !== 0) && cellsByX[0][0] === 0 && cellsByX[2][2] === 8)
+      || ((cell % 2 !== 0) && cellsByX[0][2] === 2 && cellsByX[2][0] === 6)) {
     return cell;
   }
 }
@@ -160,7 +162,7 @@ export function canPlaceInOppositeCorner(cell) {
   }
 }
 
-  // Empty corner: The player plays in a corner square.
+// Empty corner: The player plays in a corner square.
 export function canPlaceInCorner(cell) {
   const cellsByO = findCellsOccupiedByO();
   const cellsByX = findCellsOccupiedByX();
@@ -173,4 +175,4 @@ export function canPlaceInCorner(cell) {
   }
 }
 
-  // Empty side: The player plays in a middle square on any of the four sides.
+// Empty side: The player plays in a middle square on any of the four sides.
