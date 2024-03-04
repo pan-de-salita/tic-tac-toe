@@ -29,7 +29,7 @@ export function handleCell(e) {
         computerMakesMove();
         switchTurn();
         changeTurnMessage();
-      }, 666); // devil in the details
+      }, 600);
     }
   }
 }

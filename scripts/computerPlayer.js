@@ -18,7 +18,7 @@ export function canWin(cell) {
   const cellsByO = findCellsOccupiedByO();
   const cellsByX = findCellsOccupiedByX();
 
-  // get cells occupied By O
+  // insert cell into cellsByO for testing
   for (let i = 0; i < cellsByO.length; i++) {
     for (let j = 0; j < cellsByX.length; j++) {
       if (cellsByO[i][j] === undefined && cellsByX[i][j] === undefined) {
@@ -67,6 +67,7 @@ export function canBlock(cell) {
   const cellsByO = findCellsOccupiedByO();
   const cellsByX = findCellsOccupiedByX();
 
+  // insert cell intro cellsByX for testing
   for (let i = 0; i < cellsByO.length; i++) {
     for (let j = 0; j < cellsByX.length; j++) {
       if (cellsByO[i][j] === undefined && cellsByX[i][j] === undefined) {
@@ -120,7 +121,6 @@ export function canBlock(cell) {
 // corners and "O" has the center, "O" must not play a corner move to
 // win. (Playing a corner move in this scenario produces a fork for "X" to win.)
 export function canBlockFork(cell) {
-  const cellsByO = findCellsOccupiedByO();
   const cellsByX = findCellsOccupiedByX();
 
   if ((cell === 0 && cellsByX[0][1] === 1 && cellsByX[1][0] === 3)
@@ -138,7 +138,6 @@ export function canBlockFork(cell) {
 // to make a mistake and may therefore be the better choice; however,
 // it makes no difference between perfect players.)
 export function canPlaceInCenter(cell) {
-  const cellsByO = findCellsOccupiedByO();
   const cellsByX = findCellsOccupiedByX();
   const centerRow = 1;
   const centerCol = 4;
@@ -151,7 +150,6 @@ export function canPlaceInCenter(cell) {
 // Opposite corner: If the opponent is in the corner, the player plays
 // the opposite corner.
 export function canPlaceInOppositeCorner(cell) {
-  const cellsByO = findCellsOccupiedByO();
   const cellsByX = findCellsOccupiedByX();
 
   if ((cell === 0 && cellsByX[2][2])
@@ -164,7 +162,6 @@ export function canPlaceInOppositeCorner(cell) {
 
 // Empty corner: The player plays in a corner square.
 export function canPlaceInCorner(cell) {
-  const cellsByO = findCellsOccupiedByO();
   const cellsByX = findCellsOccupiedByX();
 
   if ((cell === 0 && !cellsByX[2][2])
